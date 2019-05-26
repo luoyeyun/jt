@@ -21,6 +21,7 @@ public class PicServiceImpl implements PicService {
     private String localpath;
     @Value("${image.urlpath}")
     private String urlpath;
+    //1111
 
     /**
      * 文件上传实现思路
