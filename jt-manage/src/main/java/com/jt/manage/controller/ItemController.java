@@ -20,12 +20,24 @@ public class ItemController {
     @Autowired
     private ItemService itemService;
 
+    /**
+     * 分页查询商品
+     * @param page  当前页数
+     * @param rows  每页显示记录数
+     * @return
+     */
     @RequestMapping("/query")
     @ResponseBody
     public EasyUIResult findItemByPage(Integer page, Integer rows){
         return itemService.findItemByPage(page,rows);
     }
 
+    /**
+     * 查询商品分类名称
+     * @param itemCatId     商品分类ID
+     * @param response
+     * @return
+     */
     @RequestMapping(value = "/queryItemCatName",produces = "text/html;charset=utf-8")
     @ResponseBody
     public String findItemCatNameById(Long itemCatId, HttpServletResponse response){
@@ -36,7 +48,7 @@ public class ItemController {
     /**
      * 保存新增商品信息
      * @param item  商品
-     * @param desc
+     * @param desc  商品详情
      * @return
      */
     @RequestMapping("/save")
@@ -87,4 +99,7 @@ public class ItemController {
         }
         return SysResult.build(201,"查询数据失败");
     }
+
+
+
 }
