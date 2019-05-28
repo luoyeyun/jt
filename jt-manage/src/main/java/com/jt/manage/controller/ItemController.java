@@ -101,5 +101,15 @@ public class ItemController {
     }
 
 
-    //
+    @RequestMapping("/instock")
+    @ResponseBody
+    public SysResult instockItemByIds(String ids){
+        try{
+            itemService.instockItem(ids);
+            return SysResult.oK();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return SysResult.build(201,"商品下架失败，请稍后再试");
+    }
 }

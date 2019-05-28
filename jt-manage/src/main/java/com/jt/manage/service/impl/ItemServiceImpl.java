@@ -20,6 +20,13 @@ public class ItemServiceImpl implements ItemService {
     @Autowired
     private ItemDescMapper itemDescMapper;
 
+
+    /**
+     * 分页查询商品
+     * @param page
+     * @param rows
+     * @return
+     */
     @Override
     public EasyUIResult findItemByPage(Integer page, Integer rows) {
 
@@ -36,11 +43,21 @@ public class ItemServiceImpl implements ItemService {
         return new EasyUIResult(total,items);
     }
 
+    /**
+     * 查询商品分类名称
+     * @param id
+     * @return
+     */
     @Override
     public String findItemCatNameById(Long id) {
         return itemMapper.findItemCatNameById(id);
     }
 
+    /**
+     * 保存新增商品
+     * @param item
+     * @param desc
+     */
     @Override
     @Transactional
     public void saveItem(Item item,String desc) {
@@ -70,6 +87,16 @@ public class ItemServiceImpl implements ItemService {
     public ItemDesc findItemDescById(Long itemId) {
         ItemDesc itemDesc = itemDescMapper.selectItemDescById(itemId);
         return itemDesc;
+    }
+
+    /**
+     * 商品下架
+     * @param ids
+     */
+    @Override
+    public void instockItem(String ids) {
+        String[] itemIds = ids.split(",");
+        itemMapper.updateByPrimaryKey(null);
     }
 
     /**
