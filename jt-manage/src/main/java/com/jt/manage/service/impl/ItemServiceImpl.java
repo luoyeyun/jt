@@ -73,6 +73,7 @@ public class ItemServiceImpl implements ItemService {
         itemDesc.setItemId(item.getId());
         itemDesc.setCreated(date);
         itemDesc.setUpdated(date);
+        itemDesc.setItemDesc(desc);
         itemDescMapper.insert(itemDesc);
 
     }
@@ -94,9 +95,29 @@ public class ItemServiceImpl implements ItemService {
      * @param ids
      */
     @Override
-    public void instockItem(String ids) {
+    public void updateItemStatusByIds(String ids) {
         String[] itemIds = ids.split(",");
-        itemMapper.updateByPrimaryKey(null);
+        itemMapper.updateItemStatusByIds(itemIds);
+    }
+
+    /**
+     * 编辑商品
+     * @param item  基础信息
+     * @param desc  商品详情
+     */
+    @Override
+    public void updateItem(Item item, String desc) {
+        Date date = new Date();
+        //更新基础信息
+        item.setUpdated(date);
+        itemMapper.updateByPrimaryKeySelective(item);
+
+        //更新商品详情信息
+        ItemDesc itemDesc = new ItemDesc();
+        itemDesc.setItemId(item.getId());
+        itemDesc.setUpdated(date);
+        itemDesc.setItemDesc(desc);
+        itemDescMapper.updateByPrimaryKeySelective(itemDesc);
     }
 
     /**
@@ -109,5 +130,6 @@ public class ItemServiceImpl implements ItemService {
         String[] itemIds = ids.split(",");
         //通用Mapper方法删除商品
         itemMapper.deleteByIDS(itemIds);
+        itemDescMapper.deleteByIDS(itemIds);
     }
 }

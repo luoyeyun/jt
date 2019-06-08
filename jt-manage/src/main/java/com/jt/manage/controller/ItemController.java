@@ -83,6 +83,22 @@ public class ItemController {
         return SysResult.build(201,"删除失败");
     }
 
+    @RequestMapping("/update")
+    @ResponseBody
+    public SysResult updateItem(Item item,String desc){
+        try {
+            if (item.getCid()==null){
+                return SysResult.build(201,"商品分类不能为空");
+            }
+            itemService.updateItem(item,desc);
+            return SysResult.oK();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return SysResult.build(201,"保存商品失败");
+    }
+
+
     /**
      * 基于商品ID查询商品详情信息
      * @param itemId    商品id
@@ -100,16 +116,25 @@ public class ItemController {
         return SysResult.build(201,"查询数据失败");
     }
 
-
+    /**
+     * 商品下架
+     * @param ids   商品id
+     * @return
+     */
     @RequestMapping("/instock")
     @ResponseBody
-    public SysResult instockItemByIds(String ids){
+    public SysResult updateItemStatusByIds(String ids){
         try{
-            itemService.instockItem(ids);
+            itemService.updateItemStatusByIds(ids);
             return SysResult.oK();
         } catch (Exception e) {
             e.printStackTrace();
         }
         return SysResult.build(201,"商品下架失败，请稍后再试");
     }
+
+
+    //@RequestMapping("reshelf")
+   // @ResponseBody
+    //public SysResult
 }

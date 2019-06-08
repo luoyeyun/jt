@@ -6,4 +6,12 @@
     <select id="findItemByPage" resultType="com.jt.manage.pojo.Item">
         select * from tb_item order by updated desc limit #{start},#{rows}
     </select>
+
+    <update id="updateItemStatusByIds">
+        update tb_item set status=2 where id in(
+        <foreach collection="array" item="item" index="index" separator=",">
+            #{item}
+        </foreach>
+        )
+    </update>
 </mapper>

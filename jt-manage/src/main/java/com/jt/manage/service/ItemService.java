@@ -15,5 +15,7 @@ public interface ItemService {
 
     ItemDesc findItemDescById(Long itemId);
 
-    void instockItem(String ids);
+    void updateItemStatusByIds(String ids);
+
+    void updateItem(Item item, String desc);
 }

@@ -16,4 +16,7 @@ public interface ItemMapper extends SysMapper<Item> {
 
     @Select("select name from tb_item_cat where id=#{id}")
     String findItemCatNameById(Long id);
+
+
+    void updateItemStatusByIds(String[] ids);
 }

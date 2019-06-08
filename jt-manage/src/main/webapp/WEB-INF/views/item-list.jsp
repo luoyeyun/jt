@@ -147,7 +147,9 @@
             				$.messager.alert('提示','下架商品成功!',undefined,function(){
             					$("#itemList").datagrid("reload");
             				});
-            			}
+            			}else {
+                            $.messager.alert('提示',data.msg)
+                        }
             		});
         	    }
         	});
