@@ -8,8 +8,10 @@
     </select>
 
     <update id="updateItemStatusByIds">
-        update tb_item set status=2 where id in(
-        <foreach collection="array" item="item" index="index" separator=",">
+        update tb_item set status=#{status}
+        where id
+        in(
+        <foreach collection="ids" item="item" index="index" separator=",">
             #{item}
         </foreach>
         )

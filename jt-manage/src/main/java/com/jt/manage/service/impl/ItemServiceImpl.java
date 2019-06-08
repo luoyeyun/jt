@@ -95,9 +95,8 @@ public class ItemServiceImpl implements ItemService {
      * @param ids
      */
     @Override
-    public void updateItemStatusByIds(String ids) {
-        String[] itemIds = ids.split(",");
-        itemMapper.updateItemStatusByIds(itemIds);
+    public void updateItemStatusByIds(Long[] ids,Integer status) {
+        itemMapper.updateItemStatusByIds(ids,status);
     }
 
     /**

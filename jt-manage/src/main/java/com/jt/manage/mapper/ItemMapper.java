@@ -18,5 +18,5 @@ public interface ItemMapper extends SysMapper<Item> {
     String findItemCatNameById(Long id);
 
 
-    void updateItemStatusByIds(String[] ids);
+    void updateItemStatusByIds(@Param("ids") Long[] ids,@Param("status") Integer status);
 }
