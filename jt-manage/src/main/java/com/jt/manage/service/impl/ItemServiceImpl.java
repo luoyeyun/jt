@@ -6,12 +6,16 @@ import com.jt.manage.mapper.ItemDescMapper;
 import com.jt.manage.mapper.ItemMapper;
 import com.jt.manage.pojo.Item;
 import com.jt.manage.service.ItemService;
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.servlet.http.HttpServletRequest;
+
 import java.util.Date;
 import java.util.List;
+
 
 @Service
 public class ItemServiceImpl implements ItemService {
@@ -28,16 +32,24 @@ public class ItemServiceImpl implements ItemService {
      * @return
      */
     @Override
-    public EasyUIResult findItemByPage(Integer page, Integer rows) {
+    public EasyUIResult findItemByPage(HttpServletRequest request, Integer page, Integer rows) {
 
         //商品总记录数
         //int total = itemMapper.findItemCount();
         //通用Mapper查询
-        int total = itemMapper.selectCount(null);
+        //int total = itemMapper.selectCount(null);
         //分页查询起始位置
         int start = (page-1)*rows;
         //商品列表
-        List<Item> items = itemMapper.findItemByPage(start,rows);
+        String id = request.getParameter("id");
+        String title = request.getParameter("title");
+        List<Object> itemsList = itemMapper.findItemByPage(id,title,start,rows);
+        List<Item> items = null;
+        Long total = 0L;
+        if (CollectionUtils.isNotEmpty(itemsList)){
+            items = (List<Item>) itemsList.get(0);
+            total = ((List<Long>) itemsList.get(1)).get(0);
+        }
 
 
         return new EasyUIResult(total,items);

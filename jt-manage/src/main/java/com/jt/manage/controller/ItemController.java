@@ -6,12 +6,14 @@ import com.jt.common.vo.SysResult;
 import com.jt.manage.pojo.Item;
 import com.jt.manage.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.persistence.GeneratedValue;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @Controller
@@ -29,8 +31,8 @@ public class ItemController {
      */
     @RequestMapping("/query")
     @ResponseBody
-    public EasyUIResult findItemByPage(Integer page, Integer rows) {
-        return itemService.findItemByPage(page, rows);
+    public EasyUIResult findItemByPage(Integer page, Integer rows, HttpServletRequest request) {
+        return itemService.findItemByPage(request,page, rows);
     }
 
     /**
@@ -87,6 +89,12 @@ public class ItemController {
         return SysResult.build(201, "删除失败");
     }
 
+    /**
+     * 更新商品
+     * @param item  商品基础信息
+     * @param desc  商品详情信息
+     * @return
+     */
     @RequestMapping("/update")
     @ResponseBody
     public SysResult updateItem(Item item, String desc) {
