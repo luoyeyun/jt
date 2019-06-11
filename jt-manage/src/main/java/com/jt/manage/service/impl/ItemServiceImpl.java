@@ -43,7 +43,8 @@ public class ItemServiceImpl implements ItemService {
         //商品列表
         String id = request.getParameter("id");
         String title = request.getParameter("title");
-        List<Object> itemsList = itemMapper.findItemByPage(id,title,start,rows);
+        String status = request.getParameter("status");
+        List<Object> itemsList = itemMapper.findItemByPage(id,title,status,start,rows);
         List<Item> items = null;
         Long total = 0L;
         if (CollectionUtils.isNotEmpty(itemsList)){
