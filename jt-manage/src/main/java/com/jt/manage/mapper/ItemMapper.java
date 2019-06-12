@@ -12,7 +12,14 @@ public interface ItemMapper extends SysMapper<Item> {
     //@Select("select count(*) from tb_item")
     //int findItemCount();
 
-    List<Object> findItemByPage(@Param("id") String id,@Param("title") String title,@Param("status") String ststus,@Param("start") Integer start, @Param("rows") Integer rows);
+    List<Object> findItemByPage(
+            @Param("id") String id,
+            @Param("title") String title,
+            @Param("status") String ststus,
+            @Param("startTime")String startTime,
+            @Param("endTime")String endTime,
+            @Param("start") Integer start,
+            @Param("rows") Integer rows);
 
     @Select("select name from tb_item_cat where id=#{id}")
     String findItemCatNameById(Long id);

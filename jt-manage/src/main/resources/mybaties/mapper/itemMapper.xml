@@ -35,6 +35,15 @@
             <if test='status!=null and status!=""'>
                 and status LIKE concat(concat('%',#{status}),'%')
             </if>
+
+           <if test='startTime != null and startTime != "" '>
+                and created &gt;= #{startTime}
+            </if>
+
+            <if test='endTime != null and endTime != "" '>
+                and created &lt;= #{endTime}
+            </if>
+
         </where>
         order by updated
         desc limit #{start},#{rows};

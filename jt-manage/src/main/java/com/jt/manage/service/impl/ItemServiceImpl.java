@@ -44,7 +44,10 @@ public class ItemServiceImpl implements ItemService {
         String id = request.getParameter("id");
         String title = request.getParameter("title");
         String status = request.getParameter("status");
-        List<Object> itemsList = itemMapper.findItemByPage(id,title,status,start,rows);
+        String startTime = request.getParameter("startTime");
+        String endTime = request.getParameter("endTime");
+
+        List<Object> itemsList = itemMapper.findItemByPage(id,title,status,startTime,endTime,start,rows);
         List<Item> items = null;
         Long total = 0L;
         if (CollectionUtils.isNotEmpty(itemsList)){
