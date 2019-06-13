@@ -21,6 +21,9 @@
 		},{
 			label: '3',
 			value: '删除'
+		},{
+			label: '4',
+			value: '未知'
 		}]" />
         <span >创建时间:</span>
         <input id="startTime" class="easyui-datebox" sharedCalendar="#sc" style="width: 100px;height:26px;">
