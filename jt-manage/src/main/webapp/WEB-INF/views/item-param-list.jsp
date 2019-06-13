@@ -26,7 +26,7 @@
 		return array.join(",");
 	}
 
-    function getSelectionsIds(){
+    function getSelectionsParamIds(){
     	var itemList = $("#itemParamList");
     	var sels = itemList.datagrid("getSelections");
     	var ids = [];
@@ -55,7 +55,7 @@
         text:'删除',
         iconCls:'icon-cancel',
         handler:function(){
-        	var ids = getSelectionsIds();
+        	var ids = getSelectionsParamIds();
         	if(ids.length == 0){
         		$.messager.alert('提示','未选中商品规格!');
         		return ;

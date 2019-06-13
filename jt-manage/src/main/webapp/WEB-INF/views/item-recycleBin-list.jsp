@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<table class="easyui-datagrid" id="itemList" title="商品列表"
-       data-options="singleSelect:false,collapsible:true,pagination:true,url:'/item/queryDeletedItems',method:'post',pageSize:20,toolbar:toolbar">
+<table class="easyui-datagrid" id="itemRecycleBinList" title="商品列表"
+       data-options="singleSelect:false,collapsible:true,pagination:true,
+       url:'/item/queryDeletedItems',method:'post',pageSize:20,toolbar:toolbar">
 
     <thead>
     <div id="tb" style="padding:3px">
@@ -30,7 +31,8 @@
         --
         <input id="endTime" class="easyui-datebox" sharedCalendar="#sc" style="width: 100px;height:26px;">
         <div id="sc" class="easyui-calendar"></div>
-        <button id="deletedItems" href="javascript:void(0)" class="easyui-linkbutton" plain="true" onclick="doSearchDeletedItems()">查询</button>
+        <button id="deletedItems" href="javascript:void(0)" class="easyui-linkbutton"
+                plain="true" onclick="doSearchDeletedItems()">查询</button>
     </div>
     <tr>
         <th data-options="field:'ck',checkbox:true"></th>
@@ -48,15 +50,11 @@
     </thead>
 </table>
 
-<div id="itemEditWindow" class="easyui-window" title="编辑商品"
-     data-options="modal:true,closed:true,iconCls:'icon-save',href:'/page/item-edit'"
-     style="width:80%;height:80%;padding:10px;">
-</div>
 <script>
 
     //查询事件
     function doSearchDeletedItems() {
-        $('#itemList').datagrid('load', {
+        $('#itemRecycleBinList').datagrid('load', {
             id: $('#itemid').val(),
             title: $('#title').val(),
             /*status: $('#status').textbox('getValue'),*/
@@ -65,8 +63,9 @@
         });
     }
 
-    function getSelectionsIds() {
-        var itemList = $("#itemList");
+    function getRecycleSelectionsIds() {
+        debugger
+        var itemList = $("#itemRecycleBinList");
         var sels = itemList.datagrid("getSelections");
         var ids = [];
         for (var i in sels) {
@@ -80,7 +79,7 @@
         text: '删除',
         iconCls: 'icon-cancel',
         handler: function () {
-            var ids = getSelectionsIds();
+            var ids = getRecycleSelectionsIds();
             if (ids.length == 0) {
                 $.messager.alert('提示', '未选中商品!');
                 return;
@@ -91,7 +90,7 @@
                     $.post("/item/recycleBin/delete", params, function (data) {
                         if (data.status == 200) {
                             $.messager.alert('提示', '删除商品成功!', undefined, function () {
-                                $("#itemList").datagrid("reload");
+                                $("#itemRecycleBinList").datagrid("reload");
                             });
                         } else {
                             $.messager.alert("提示", data.msg);
@@ -104,7 +103,7 @@
         text: '恢复',
         iconCls: 'icon-remove',
         handler: function () {
-            var ids = getSelectionsIds();
+            var ids = getRecycleSelectionsIds();
             if (ids.length == 0) {
                 $.messager.alert('提示', '未选中商品!');
                 return;
@@ -115,7 +114,7 @@
                     $.post("/item/regain", params, function (data) {
                         if (data.status == 200) {
                             $.messager.alert('提示', '恢复商品成功!', undefined, function () {
-                                $("#itemList").datagrid("reload");
+                                $("#itemRecycleBinList").datagrid("reload");
                             });
                         } else {
                             $.messager.alert('提示', data.msg)
