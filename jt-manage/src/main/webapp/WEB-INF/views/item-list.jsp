@@ -5,9 +5,31 @@
     <thead>
     <div id="tb" style="padding:3px">
         <span>商品ID:</span>
-        <input id="itemid" style="line-height:26px;border:1px solid #ccc">
+        <input id="itemid" class="easyui-input" style="line-height:24.0208px;">
         <span>商品标题:</span>
-        <input id="title" style="line-height:26px;border:1px solid #ccc">
+        <input id="title" class="easyui-input" style="line-height:24.0208px;">
+        <span >状态:</span>
+        <input id="status" class="easyui-combobox" style="width: 100px;height: 26px;" data-options="
+		valueField: 'label',
+		textField: 'value',
+		data: [{
+			label: '1',
+			value: '正常'
+		},{
+			label: '2',
+			value: '下架'
+		},{
+			label: '3',
+			value: '删除'
+		},{
+			label: '4',
+			value: '未知'
+		}]" />
+        <span >创建时间:</span>
+        <input id="startTime" class="easyui-datebox" sharedCalendar="#sc" style="width: 100px;height:26px;">
+        --
+        <input id="endTime" class="easyui-datebox" sharedCalendar="#sc" style="width: 100px;height:26px;">
+        <div id="sc" class="easyui-calendar"></div>
         <button href="javascript:void(0)" class="easyui-linkbutton" plain="true" onclick="doSearch()">查询</button>
     </div>
     <tr>
@@ -35,10 +57,11 @@
     //查询事件
     function doSearch() {
         $('#itemList').datagrid('load', {
-
-                id: $('#itemid').val(),
-                title: $('#title').val()
-
+            id: $('#itemid').val(),
+            title: $('#title').val(),
+            status: $('#status').textbox('getValue'),
+            startTime: $('#startTime').textbox('getValue'),
+            endTime: $('#endTime').textbox('getValue')
         });
     }
 

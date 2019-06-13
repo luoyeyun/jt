@@ -20,6 +20,7 @@
 	         		<li data-options="attributes:{'url':'/page/item-add'}">新增商品</li>
 	         		<li data-options="attributes:{'url':'/page/item-list'}">查询商品</li>
 	         		<li data-options="attributes:{'url':'/page/item-param-list'}">规格参数</li>
+					<li data-options="attributes:{'url':'/page/item-recycleBin-list'}">商品回收站</li>
 	         	</ul>
          	</li>
          	<li>

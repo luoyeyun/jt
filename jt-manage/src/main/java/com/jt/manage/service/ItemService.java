@@ -12,7 +12,7 @@ public interface ItemService {
 
     String findItemCatNameById(Long id);
 
-    void deleteItems(String ids);
+    void deleteIRecycleBintems(Long[] ids);
 
     void saveItem(Item item, String desc);
 
@@ -21,4 +21,6 @@ public interface ItemService {
     void updateItemStatusByIds(Long[] ids,Integer status);
 
     void updateItem(Item item, String desc);
+
+    EasyUIResult queryDeletedItems(HttpServletRequest request, Integer page, Integer rows);
 }

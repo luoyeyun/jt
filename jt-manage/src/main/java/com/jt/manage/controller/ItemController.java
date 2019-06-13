@@ -36,6 +36,19 @@ public class ItemController {
     }
 
     /**
+     * 分页查询已删除商品
+     *
+     * @param page 当前页数
+     * @param rows 每页显示记录数
+     * @return
+     */
+    @RequestMapping("/queryDeletedItems")
+    @ResponseBody
+    public EasyUIResult queryDeletedItems(Integer page, Integer rows, HttpServletRequest request) {
+        return itemService.queryDeletedItems(request,page, rows);
+    }
+
+    /**
      * 查询商品分类名称
      *
      * @param itemCatId 商品分类ID
@@ -79,9 +92,16 @@ public class ItemController {
      */
     @RequestMapping("/delete")
     @ResponseBody
-    public SysResult deleteItems(String ids) {
-        try {
+    public SysResult deleteItems(Long[] ids) {
+        /*try {
             itemService.deleteItems(ids);
+            return SysResult.oK();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }*/
+        int status = 3;
+        try {
+            itemService.updateItemStatusByIds(ids,status);
             return SysResult.oK();
         } catch (Exception e) {
             e.printStackTrace();
@@ -151,7 +171,7 @@ public class ItemController {
 
     @RequestMapping("/reshelf")
     @ResponseBody
-    public SysResult reshelfItem(Long[] ids){
+    public SysResult reshelfItems(Long[] ids){
         int status = 1;
         try {
             itemService.updateItemStatusByIds(ids,status);
@@ -160,5 +180,35 @@ public class ItemController {
             e.printStackTrace();
         }
         return SysResult.build(201, "商品上架失败，请稍后再试");
+    }
+
+    @RequestMapping("/regain")
+    @ResponseBody
+    public SysResult regainItems(Long[] ids){
+        int status = 2;
+        try {
+            itemService.updateItemStatusByIds(ids,status);
+            return SysResult.oK();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return SysResult.build(201, "商品恢复失败，请稍后再试");
+    }
+
+    /**
+     * 基于商品ID删除回收站商品
+     * @param ids 商品id
+     * @return
+     */
+    @RequestMapping("/recycleBin/delete")
+    @ResponseBody
+    public SysResult deleteIRecycleBintems(Long[] ids) {
+        try {
+            itemService.deleteIRecycleBintems(ids);
+            return SysResult.oK();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return SysResult.build(201, "删除商品失败");
     }
 }

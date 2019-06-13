@@ -43,7 +43,11 @@ public class ItemServiceImpl implements ItemService {
         //商品列表
         String id = request.getParameter("id");
         String title = request.getParameter("title");
-        List<Object> itemsList = itemMapper.findItemByPage(id,title,start,rows);
+        String status = request.getParameter("status");
+        String startTime = request.getParameter("startTime");
+        String endTime = request.getParameter("endTime");
+
+        List<Object> itemsList = itemMapper.findItemByPage(id,title,status,startTime,endTime,start,rows);
         List<Item> items = null;
         Long total = 0L;
         if (CollectionUtils.isNotEmpty(itemsList)){
@@ -103,7 +107,7 @@ public class ItemServiceImpl implements ItemService {
     }
 
     /**
-     * 商品下架
+     * 更新商品状态
      * @param ids
      */
     @Override
@@ -132,15 +136,43 @@ public class ItemServiceImpl implements ItemService {
     }
 
     /**
+     * 查询已删除的商品
+     * @param request
+     * @param page
+     * @param rows
+     * @return
+     */
+    @Override
+    public EasyUIResult queryDeletedItems(HttpServletRequest request, Integer page, Integer rows) {
+        //分页查询起始位置
+        int start = (page-1)*rows;
+        //查询参数
+        String id = request.getParameter("id");
+        String title = request.getParameter("title");
+        //String status = request.getParameter("status");
+        String startTime = request.getParameter("startTime");
+        String endTime = request.getParameter("endTime");
+
+        List<Object> itemsList = itemMapper.queryDeletedItems(id,title,startTime,endTime,start,rows);
+        List<Item> items = null;
+        Long total = 0L;
+        if (CollectionUtils.isNotEmpty(itemsList)){
+            items = (List<Item>) itemsList.get(0);
+            total = ((List<Long>) itemsList.get(1)).get(0);
+        }
+        return new EasyUIResult(total,items);
+    }
+
+    /**
      * 基于商品ID删除商品
      * @param ids
      */
     @Transactional
     @Override
-    public void deleteItems(String ids) {
-        String[] itemIds = ids.split(",");
+    public void deleteIRecycleBintems(Long[] ids) {
+        //String[] itemIds = ids.split(",");
         //通用Mapper方法删除商品
-        itemMapper.deleteByIDS(itemIds);
-        itemDescMapper.deleteByIDS(itemIds);
+        itemMapper.deleteByIDS(ids);
+        itemDescMapper.deleteByIDS(ids);
     }
 }
