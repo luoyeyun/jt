@@ -3,7 +3,7 @@
        data-options="singleSelect:false,collapsible:true,pagination:true,url:'/item/query',method:'post',pageSize:20,toolbar:toolbar">
 
     <thead>
-    <div id="tb" style="padding:3px">
+    <div id="choice-box-menu-item" style="padding:3px">
         <span>商品ID:</span>
         <input id="itemid" class="easyui-input" style="line-height:24.0208px;">
         <span>商品标题:</span>
