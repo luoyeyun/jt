@@ -149,7 +149,6 @@ public class ItemServiceImpl implements ItemService {
         //查询参数
         String id = request.getParameter("id");
         String title = request.getParameter("title");
-        //String status = request.getParameter("status");
         String startTime = request.getParameter("startTime");
         String endTime = request.getParameter("endTime");
 
