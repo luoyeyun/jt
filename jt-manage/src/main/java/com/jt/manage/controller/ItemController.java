@@ -45,7 +45,7 @@ public class ItemController {
     @RequestMapping("/queryDeletedItems")
     @ResponseBody
     public EasyUIResult queryDeletedItems(Integer page, Integer rows, HttpServletRequest request) {
-        return itemService.queryDeletedItems(request,page, rows);
+        return itemService.queryDeletedItems(request,page,rows);
     }
 
     /**

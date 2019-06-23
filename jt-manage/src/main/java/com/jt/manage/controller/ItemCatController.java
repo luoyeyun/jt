@@ -25,7 +25,8 @@ public class ItemCatController {
         //展示一级列表信息
         //Long parentId = 0L;
 
-        List<EasyUI_Tree> list = itemCatService.findTree(parentId);
+       // List<EasyUI_Tree> list = itemCatService.findTree(parentId);
+        List<EasyUI_Tree> list = itemCatService.findTreeCache(parentId);
         return list;
     }
 

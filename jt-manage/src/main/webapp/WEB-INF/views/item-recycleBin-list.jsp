@@ -6,9 +6,9 @@
     <thead>
     <div id="tb" style="padding:3px">
         <span>商品ID:</span>
-        <input id="itemid" class="easyui-input" style="line-height:24.0208px;">
+        <input id="itemid" class="easyui-input" style="line-height:22.0208px;border-radius:5px 5px 5px 5px;border: 1px solid #6FA5DB">
         <span>商品标题:</span>
-        <input id="title" class="easyui-input" style="line-height:24.0208px;">
+        <input id="title" class="easyui-input" style="line-height:22.0208px;border-radius:5px 5px 5px 5px;border: 1px solid #6FA5DB">
         <%--<span >状态:</span>
         <input id="status" class="easyui-combobox" style="width: 100px;height: 26px;" data-options="
 		valueField: 'label',
@@ -31,12 +31,12 @@
         --
         <input id="endTime" class="easyui-datebox" sharedCalendar="#sc" style="width: 100px;height:26px;">
         <div id="sc" class="easyui-calendar"></div>
-        <button id="deletedItems" href="javascript:void(0)" class="easyui-linkbutton"
-                plain="true" onclick="doSearchDeletedItems()">查询</button>
+        <button id="deletedItems" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls: 'icon-search'"
+                plain="true" onclick="doSearchDeletedItems()" style="background: #99cdff">查询</button>
     </div>
     <tr>
         <th data-options="field:'ck',checkbox:true"></th>
-        <th data-options="field:'id',width:60">商品ID</th>
+        <th data-options="field:'id',width:80">商品ID</th>
         <th data-options="field:'title',width:200">商品标题</th>
         <th data-options="field:'cid',width:100,align:'center',formatter:KindEditorUtil.findItemName">叶子类目</th>
         <th data-options="field:'sellPoint',width:100">卖点</th>
@@ -64,7 +64,7 @@
     }
 
     function getRecycleSelectionsIds() {
-        debugger
+        //debugger
         var itemList = $("#itemRecycleBinList");
         var sels = itemList.datagrid("getSelections");
         var ids = [];
@@ -101,7 +101,7 @@
         }
     }, '-', {
         text: '恢复',
-        iconCls: 'icon-remove',
+        iconCls: 'icon-undo',
         handler: function () {
             var ids = getRecycleSelectionsIds();
             if (ids.length == 0) {

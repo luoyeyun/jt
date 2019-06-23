@@ -1,9 +1,14 @@
 package com.jt.common.po;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Table(name = "tb_item_desc")
 public class ItemDesc extends BasePojo{
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long itemId;
     private String itemDesc;
 
