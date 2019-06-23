@@ -4,7 +4,7 @@
        url:'/item/queryDeletedItems',method:'post',pageSize:20,toolbar:toolbar">
 
     <thead>
-    <div id="tb" style="padding:3px">
+    <div id="choice-box-menu-RecycleBin-item" style="padding:3px">
         <span>商品ID:</span>
         <input id="itemid" class="easyui-input" style="line-height:22.0208px;border-radius:5px 5px 5px 5px;border: 1px solid #6FA5DB">
         <span>商品标题:</span>
@@ -64,9 +64,14 @@
     }
 
     function getRecycleSelectionsIds() {
+<<<<<<< HEAD
         //debugger
         var itemList = $("#itemRecycleBinList");
         var sels = itemList.datagrid("getSelections");
+=======
+        var rbItemList = $("#itemRecycleBinList");
+        var sels = rbItemList.datagrid("getSelections");
+>>>>>>> origin/master
         var ids = [];
         for (var i in sels) {
             ids.push(sels[i].id);
